@@ -313,6 +313,12 @@ const InvoiceGenerator = ({ defaultCountry = 'usa' }) => {
       } catch (gmailError) {
         console.warn('Gmail API failed, falling back to mailto:', gmailError);
         
+        // Show user-friendly error message
+        const isConfigError = gmailError.message && gmailError.message.includes('credentials are not configured');
+        const errorMsg = isConfigError 
+          ? 'Gmail integration not configured. Opening your email client instead...'
+          : 'Gmail authentication needed. Opening your email client instead...';
+        
         // Fallback to mailto if Gmail API fails
         const encodedSubject = encodeURIComponent(subject);
         const encodedBody = encodeURIComponent(body);
@@ -321,7 +327,7 @@ const InvoiceGenerator = ({ defaultCountry = 'usa' }) => {
         window.open(mailtoLink, '_blank');
         pdf.save(fileName);
         
-        alert('Email client opened! Please attach the downloaded PDF file before sending.\n\nNote: For direct sending with attachment, please sign in to Gmail when prompted.');
+        alert(errorMsg + '\n\nPlease attach the downloaded PDF file before sending.');
       }
     } catch (error) {
       console.error('Error sending email:', error);

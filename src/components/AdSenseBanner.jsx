@@ -14,17 +14,16 @@ const AdSenseBanner = ({ slot, format = 'auto', responsive = true, style = {} })
     }
   }, []);
 
-  if (!publisherId || publisherId === 'ca-pub-7469351471654900') {
-    if (!slot) {
-      return (
-        <div 
-          className="bg-yellow-50 border border-yellow-300 rounded-lg flex items-center justify-center text-yellow-700 text-sm p-4"
-          style={{ minHeight: '90px', ...style }}
-        >
-          AdSense: Please configure ad slot IDs in your deployment environment variables
-        </div>
-      );
-    }
+  // Show warning only if slot ID is missing (empty string)
+  if (!slot) {
+    return (
+      <div 
+        className="bg-yellow-50 border border-yellow-300 rounded-lg flex items-center justify-center text-yellow-700 text-sm p-4"
+        style={{ minHeight: '90px', ...style }}
+      >
+        AdSense: Please configure ad slot IDs in your deployment environment variables
+      </div>
+    );
   }
 
   return (
