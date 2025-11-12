@@ -15,8 +15,8 @@ export const GMAIL_CONFIG = {
 
 export const ADSENSE_CONFIG = {
   // Your AdSense Publisher ID (format: ca-pub-XXXXXXXXXXXXXXXX)
-  publisherId: import.meta.env.VITE_ADSENSE_PUBLISHER_ID || "",
-  // Get these from your AdSense dashboard
+  publisherId: import.meta.env.VITE_ADSENSE_PUBLISHER_ID || "ca-pub-7469351471654900",
+  // Get these from your AdSense dashboard - create ad units for "Display ads"
   topBannerSlot: import.meta.env.VITE_ADSENSE_TOP_SLOT || "",
   bottomBannerSlot: import.meta.env.VITE_ADSENSE_BOTTOM_SLOT || ""
 };
