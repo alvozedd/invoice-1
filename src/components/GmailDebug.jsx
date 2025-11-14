@@ -10,7 +10,8 @@ const GmailDebug = () => {
     gapiLoaded: false,
     isInitialized: false,
     isSignedIn: false,
-    error: null
+    error: null,
+    errorDetails: null
   });
 
   useEffect(() => {
@@ -32,9 +33,28 @@ const GmailDebug = () => {
         info.isInitialized = gmailService.isInitialized;
         info.isSignedIn = gmailService.isSignedIn;
         info.error = null; // Clear error if successful
+        info.errorDetails = null;
       } catch (error) {
-        info.error = error.message || error.toString();
-        console.error('Gmail Debug - Initialization Error:', error);
+        console.error('Gmail Debug - Full Error Object:', error);
+        
+        // Extract error details
+        info.error = error.message || error.error || 'Unknown error';
+        info.errorDetails = {
+          message: error.message,
+          details: error.details,
+          result: error.result,
+          status: error.status,
+          code: error.code,
+          type: typeof error,
+          stringified: JSON.stringify(error, null, 2)
+        };
+        
+        // Log to console for debugging
+        console.error('Error Message:', error.message);
+        console.error('Error Details:', error.details);
+        console.error('Error Result:', error.result);
+        console.error('Error Status:', error.status);
+        console.error('Full Error JSON:', info.errorDetails.stringified);
       }
 
       setDebugInfo(info);
@@ -83,8 +103,16 @@ const GmailDebug = () => {
         </div>
 
         {debugInfo.error && (
-          <div className="mt-2 p-2 bg-red-50 border border-red-300 rounded text-xs text-red-700">
+          <div className="mt-2 p-2 bg-red-50 border border-red-300 rounded text-xs text-red-700 max-h-40 overflow-auto">
             <strong>Error:</strong> {debugInfo.error}
+            {debugInfo.errorDetails && (
+              <details className="mt-2">
+                <summary className="cursor-pointer font-semibold">Show Full Error Details</summary>
+                <pre className="mt-1 text-xs whitespace-pre-wrap bg-red-100 p-1 rounded">
+                  {debugInfo.errorDetails.stringified}
+                </pre>
+              </details>
+            )}
           </div>
         )}
 
