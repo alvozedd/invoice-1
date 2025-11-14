@@ -31,8 +31,10 @@ const GmailDebug = () => {
         await gmailService.initClient();
         info.isInitialized = gmailService.isInitialized;
         info.isSignedIn = gmailService.isSignedIn;
+        info.error = null; // Clear error if successful
       } catch (error) {
-        info.error = error.message;
+        info.error = error.message || error.toString();
+        console.error('Gmail Debug - Initialization Error:', error);
       }
 
       setDebugInfo(info);
