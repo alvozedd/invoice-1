@@ -3,6 +3,7 @@ import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import countryData from '../utils/countryData';
 import AdSenseBanner from '../components/AdSenseBanner';
+import GmailDebug from '../components/GmailDebug';
 import { gmailService } from '../services/gmailService';
 import { ADSENSE_CONFIG } from '../config/credentials';
 
@@ -748,6 +749,9 @@ const InvoiceGenerator = ({ defaultCountry = 'usa' }) => {
           )}
         </div>
       </div>
+
+      {/* Gmail Debug Panel - Remove in production */}
+      <GmailDebug />
     </div>
   );
 };

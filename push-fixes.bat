@@ -2,7 +2,7 @@
 echo Committing and pushing fixes for Vercel build and Gmail/AdSense...
 echo.
 
-git commit -m "Fix Vercel build issue and improve Gmail/AdSense error handling" -m "" -m "- Add vercel.json for proper Vite build configuration" -m "- Improve Gmail API initialization with better error messages" -m "- Add QUICK_FIX_GUIDE.md with setup instructions for AdSense and Gmail" -m "- Fix redirect URI guidance for OAuth configuration" -m "" -m "Co-authored-by: factory-droid[bot] <138933559+factory-droid[bot]@users.noreply.github.com>"
+git commit -m "Fix Vercel build and Gmail null auth instance error" -m "" -m "- Add vercel.json for proper Vite build configuration" -m "- Fix 'Cannot read properties of null (reading isSignedIn)' error" -m "- Add proper null checks for gapi.auth2.getAuthInstance()" -m "- Wait for auth2 instance to be ready before accessing" -m "- Improve Gmail API initialization with better error messages" -m "- Add QUICK_FIX_GUIDE.md with setup instructions" -m "" -m "Co-authored-by: factory-droid[bot] <138933559+factory-droid[bot]@users.noreply.github.com>"
 
 if %errorlevel% neq 0 (
     echo.
